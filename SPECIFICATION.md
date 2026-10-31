@@ -1600,6 +1600,8 @@ sequenceDiagram
 
 Ver [IMP-010](#23-anexos): `src/queries.js` (deprecado) e `utils/populateCategories.js` conectam a arquivos `.accdb` via `node-adodb`, em caminhos absolutos distintos, sem uso pela aplicação atual. Documentados aqui apenas por estarem no repositório — não fazem parte do fluxo de integração ativo.
 
+**Manutenção do `attachments/games.accdb` (2026-10-31):** foram adicionados 62 jogos de Nintendo Switch (47, `System = 'SWITCH'`) e Switch 2 (15, `System = 'SWITCH 2'`) à tabela `[All Games]`, catalogados a partir das fotos `jogos1..5.jpeg`. Todos com `platform = 'CONSOLE'`, `fisical_disc = True`, `genuine = True`, `app_id`/`playtime_minutes` nulos, ids 384–445. O script (dialeto Access, um `INSERT` por linha) está em `attachments/add_switch_games_access.sql`. Apenas dados — nenhuma alteração de estrutura. Esses registros existem somente no `.accdb` legado; **não** foram migrados ao PostgreSQL (a tabela `System` do schema atual não possui Switch/Switch 2).
+
 ## 11. Processos Assíncronos
 
 **Não há nenhum agendador, fila de mensagens ou worker em background neste sistema.** Toda a lógica é síncrona ao ciclo request/response de Express ou disparada manualmente. Isso é afirmado explicitamente porque é uma ausência relevante, não uma omissão do documento:
